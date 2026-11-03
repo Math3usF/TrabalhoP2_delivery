@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/authContexto'
 import { mensagemDeErro, statusDoErro } from '../utils/erros'
 
 export default function Login() {

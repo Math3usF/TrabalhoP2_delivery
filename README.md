@@ -67,7 +67,8 @@ src/
 │   ├── PratoForm.tsx     formulário de criar/editar com validação
 │   └── Rodape.tsx        créditos da dupla
 ├── contexts/
-│   └── AuthContext.tsx   usuário, token, carregando, login, logout + useAuth()
+│   ├── AuthContext.tsx   provider: usuário, token, login, logout
+│   └── authContexto.ts   createContext + hook useAuth()
 ├── pages/
 │   ├── Login.tsx         formulário controlado, erro por status
 │   ├── Cardapio.tsx      dona do estado: lista, busca, CRUD, 4 estados

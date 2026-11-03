@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import Cabecalho from './Cabecalho'
 import Rodape from './Rodape'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/authContexto'
 
 /** Moldura das telas logadas: cabeçalho fixo + a página filha no <Outlet />. */
 export default function Layout() {

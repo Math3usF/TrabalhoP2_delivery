@@ -46,9 +46,24 @@ export default function Cardapio() {
     }
   }, [])
 
+  // Carga inicial: os setState acontecem depois do await, então não há
+  // render em cascata. O `ativo` evita atualizar estado após desmontar.
   useEffect(() => {
-    carregar()
-  }, [carregar])
+    let ativo = true
+    ;(async () => {
+      try {
+        const lista = await listarPratos()
+        if (ativo) setPratos(lista)
+      } catch (err) {
+        if (ativo) setErro(mensagemDeErro(err))
+      } finally {
+        if (ativo) setCarregando(false)
+      }
+    })()
+    return () => {
+      ativo = false
+    }
+  }, [])
 
   // Busca local com filter + includes (aula 8): nada de ir à API a cada tecla.
   // Compara sem acento e no texto já traduzido ("macarrao" acha "Macarrão").
