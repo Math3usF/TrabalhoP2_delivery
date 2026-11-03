@@ -136,6 +136,21 @@ Implementada em `src/utils/preco.ts` e formatada com `Intl.NumberFormat('pt-BR')
 | `/`        | protegida (cardápio) |
 | `*`        | 404      |
 
+## Roteiro de teste rápido
+
+1. `npm run dev` e abra <http://localhost:5173>.
+2. Entre com `emilys` / `emilyspass`.
+3. Confira os 50 pratos e o preço de um deles
+   (ex.: Pizza Margherita Clássica, 35 min → **R$ 32,50**).
+4. Busque `macarrao` (sem acento) e depois `zzzzzz` (estado vazio).
+5. Clique em **+ Novo prato**, preencha e salve: o prato aparece no topo da lista.
+6. Edite ou exclua esse prato: a API de treino responde **404** e o app
+   mostra a mensagem em português — isso é o comportamento esperado.
+7. Recarregue com **F5**: a sessão continua; os pratos criados na sessão somem,
+   porque a API não persiste.
+8. Reduza a janela para **375 px**: não aparece rolagem lateral.
+9. Clique em **Sair**: volta ao login e a rota protegida fica bloqueada.
+
 ## Checklist da entrega
 
 - [x] `npm run dev` abre a página
