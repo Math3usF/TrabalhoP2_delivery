@@ -167,3 +167,8 @@ Implementada em `src/utils/preco.ts` e formatada com `Intl.NumberFormat('pt-BR')
 O desenvolvimento contou com o apoio do modelo **DeepSeek V4.1 Flash Free**,
 utilizado através do **OpenCode** (agente de código no terminal).
 A dupla revisou, testou e validou todo o código entregue.
+
+## Repositório
+
+Código-fonte no GitHub:
+<https://github.com/Math3usF/TrabalhoP2_delivery>
