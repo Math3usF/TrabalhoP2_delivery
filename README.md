@@ -64,7 +64,8 @@ src/
 │   ├── Layout.tsx        moldura das telas logadas (<Outlet />)
 │   ├── Mensagem.tsx      carregando / erro / vazio / ok
 │   ├── PratoCard.tsx     card do prato (foto, cozinha, tempo, preço)
-│   └── PratoForm.tsx     formulário de criar/editar com validação
+│   ├── PratoForm.tsx     formulário de criar/editar com validação
+│   └── Rodape.tsx        créditos da dupla
 ├── contexts/
 │   └── AuthContext.tsx   usuário, token, carregando, login, logout + useAuth()
 ├── pages/
@@ -79,7 +80,8 @@ src/
 │   └── pratos.ts         listar, criar, atualizar, excluir
 ├── utils/
 │   ├── erros.ts          mensagemDeErro() por status HTTP
-│   └── preco.ts          regra de preço + formatação em reais
+│   ├── preco.ts          regra de preço + formatação em reais
+│   └── traducao.ts       pratos e cozinhas em português + busca sem acento
 ├── types.ts          Usuario, Prato, ListaPratos
 ├── App.tsx           tabela de rotas
 ├── main.tsx          BrowserRouter + AuthProvider
@@ -143,3 +145,9 @@ Implementada em `src/utils/preco.ts` e formatada com `Intl.NumberFormat('pt-BR')
 - [x] Console sem erro vermelho
 - [x] `npm run build` sem erro
 - [x] README com os nomes da dupla
+
+## Uso de IA
+
+O desenvolvimento contou com o apoio do modelo **DeepSeek V4.1 Flash Free**,
+utilizado através do **OpenCode** (agente de código no terminal).
+A dupla revisou, testou e validou todo o código entregue.
