@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import type { Prato } from '../types'
 import type { CamposPrato } from '../services/pratos'
 import { calcularPreco, formatarPreco } from '../utils/preco'
+import { traduzirCozinha, traduzirPrato } from '../utils/traducao'
 
 type Props = {
   /** Quando vem um prato, o formulário entra em modo edição. */
@@ -19,8 +20,11 @@ export default function PratoForm({
   aoSalvar,
   aoCancelar,
 }: Props) {
-  const [name, setName] = useState(inicial?.name ?? '')
-  const [cuisine, setCuisine] = useState(inicial?.cuisine ?? '')
+  // Ao editar, o formulário já abre com o texto em português.
+  const [name, setName] = useState(inicial ? traduzirPrato(inicial.name) : '')
+  const [cuisine, setCuisine] = useState(
+    inicial ? traduzirCozinha(inicial.cuisine) : '',
+  )
   const [image, setImage] = useState(inicial?.image ?? '')
   const [preparo, setPreparo] = useState(String(inicial?.prepTimeMinutes ?? 15))
   const [cozimento, setCozimento] = useState(String(inicial?.cookTimeMinutes ?? 15))

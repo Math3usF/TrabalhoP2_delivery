@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Prato } from '../types'
 import { calcularPreco, formatarPreco, formatarTempo } from '../utils/preco'
+import { traduzirCozinha, traduzirPrato } from '../utils/traducao'
 
 type Props = {
   prato: Prato
@@ -14,6 +15,8 @@ export default function PratoCard({ prato, ocupado, aoEditar, aoExcluir }: Props
   const [imagemFalhou, setImagemFalhou] = useState(false)
   const preco = calcularPreco(prato)
   const tempoTotal = prato.prepTimeMinutes + prato.cookTimeMinutes
+  const nome = traduzirPrato(prato.name)
+  const cozinha = traduzirCozinha(prato.cuisine)
 
   return (
     <li className="prato-card">
@@ -21,7 +24,7 @@ export default function PratoCard({ prato, ocupado, aoEditar, aoExcluir }: Props
         <img
           className="prato-foto"
           src={prato.image}
-          alt={prato.name}
+          alt={nome}
           loading="lazy"
           onError={() => setImagemFalhou(true)}
         />
@@ -32,8 +35,8 @@ export default function PratoCard({ prato, ocupado, aoEditar, aoExcluir }: Props
       )}
 
       <div className="prato-corpo">
-        <h2 className="prato-nome">{prato.name}</h2>
-        <p className="prato-cozinha">{prato.cuisine}</p>
+        <h2 className="prato-nome">{nome}</h2>
+        <p className="prato-cozinha">{cozinha}</p>
 
         <p className="prato-detalhes">
           <span title="Preparo + cozimento">⏱ {formatarTempo(tempoTotal)}</span>
@@ -54,7 +57,7 @@ export default function PratoCard({ prato, ocupado, aoEditar, aoExcluir }: Props
             className="botao botao-perigo"
             onClick={() => aoExcluir(prato)}
             disabled={ocupado}
-            aria-label={`Excluir ${prato.name}`}
+            aria-label={`Excluir ${nome}`}
           >
             {ocupado ? 'Aguarde…' : 'Excluir'}
           </button>

@@ -10,6 +10,7 @@ import {
   type CamposPrato,
 } from '../services/pratos'
 import { mensagemDeErro } from '../utils/erros'
+import { normalizar, textoBuscavel, traduzirPrato } from '../utils/traducao'
 import type { Prato } from '../types'
 
 type Aviso = { texto: string; tipo: 'ok' | 'erro' }
@@ -50,13 +51,10 @@ export default function Cardapio() {
   }, [carregar])
 
   // Busca local com filter + includes (aula 8): nada de ir à API a cada tecla.
-  const termo = busca.trim().toLowerCase()
+  // Compara sem acento e no texto já traduzido ("macarrao" acha "Macarrão").
+  const termo = normalizar(busca)
   const visiveis = termo
-    ? pratos.filter(
-        (p) =>
-          p.name.toLowerCase().includes(termo) ||
-          p.cuisine.toLowerCase().includes(termo),
-      )
+    ? pratos.filter((p) => textoBuscavel(p.name, p.cuisine).includes(termo))
     : pratos
 
   function abrirNovo() {
@@ -106,7 +104,7 @@ export default function Cardapio() {
   }
 
   async function excluir(prato: Prato) {
-    if (!window.confirm(`Tirar "${prato.name}" do cardápio?`)) return
+    if (!window.confirm(`Tirar "${traduzirPrato(prato.name)}" do cardápio?`)) return
 
     setAviso(null)
     setOcupado(prato.id)
