@@ -8,7 +8,7 @@ Trabalho de **Laboratório de Programação Front End — Engenharia de Software
 - Matheus Fernando Cardoso Bezerra
 - Marília Soares Caetano da Silva
 
-**Repositório:** <https://github.com/SEU-USUARIO/fastsnack>
+**Repositório:** <https://github.com/Math3usF/TrabalhoP2_delivery>
 
 ---
 
