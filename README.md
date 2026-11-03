@@ -95,6 +95,8 @@ src/
 - **Cardápio protegido** por `ProtectedRoute` + botão **Sair**.
 - **Lista** com foto, nome, cozinha, tempo total e preço; `map` com `key`.
 - **Busca** com `filter` + `includes` (nome ou cozinha), sem nova chamada à API.
+- **Textos em português**: nomes e cozinhas traduzidos no front
+  (`utils/traducao.ts`), e a busca ignora acentos ("macarrao" acha "Macarrão").
 - **Criar / editar / excluir**, com confirmação (`window.confirm`) antes de excluir.
 - **Quatro estados** da tela: carregando, erro, vazio e lista.
 - **Erro por status**: 400, 401, 404, 5xx e sem conexão têm mensagens próprias
