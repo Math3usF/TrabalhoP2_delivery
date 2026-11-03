@@ -120,7 +120,7 @@ export default function Cardapio() {
   }
 
   return (
-    <section className="cardapio">
+    <section className="cardapio" aria-busy={carregando}>
       <div className="cardapio-topo">
         <div>
           <h1>Cardápio</h1>

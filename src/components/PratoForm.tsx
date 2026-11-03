@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type KeyboardEvent } from 'react'
 import type { Prato } from '../types'
 import type { CamposPrato } from '../services/pratos'
 import { calcularPreco, formatarPreco } from '../utils/preco'
@@ -48,13 +48,16 @@ export default function PratoForm({
       setErroLocal('Escreve o nome do prato (pelo menos 3 letras).')
       return
     }
+
     if (cuisine.trim().length < 2) {
       setErroLocal('Informa a cozinha (ex.: Italiana, Japonesa).')
       return
     }
+
     const temposValidos = [preparoNum, cozimentoNum].every(
       (n) => Number.isFinite(n) && n >= 0 && n <= 600,
     )
+
     if (!temposValidos) {
       setErroLocal('Os tempos precisam ser números entre 0 e 600 minutos.')
       return
@@ -69,8 +72,21 @@ export default function PratoForm({
     })
   }
 
+  /** Esc fecha o formulário, mas não enquanto o pedido está no ar. */
+  function aoTeclar(e: KeyboardEvent<HTMLFormElement>) {
+    if (e.key === 'Escape' && !salvando) {
+      e.preventDefault()
+      aoCancelar()
+    }
+  }
+
   return (
-    <form className="cartao form-prato" onSubmit={enviar} noValidate>
+    <form
+      className="cartao form-prato"
+      onSubmit={enviar}
+      onKeyDown={aoTeclar}
+      noValidate
+    >
       <h2>{inicial ? 'Editar prato' : 'Novo prato'}</h2>
 
       <div className="campo">
@@ -82,6 +98,8 @@ export default function PratoForm({
           placeholder="Ex.: Macarrão ao molho branco"
           disabled={salvando}
           aria-invalid={erroLocal !== null}
+          aria-describedby={erroLocal ? 'erro-prato' : undefined}
+          autoFocus
         />
       </div>
 
@@ -93,6 +111,8 @@ export default function PratoForm({
           onChange={(e) => setCuisine(e.target.value)}
           placeholder="Ex.: Italiana"
           disabled={salvando}
+          aria-invalid={erroLocal !== null}
+          aria-describedby={erroLocal ? 'erro-prato' : undefined}
         />
       </div>
 
@@ -141,7 +161,7 @@ export default function PratoForm({
       )}
 
       {(erroLocal || erro) && (
-        <p className="msg-erro" role="alert">
+        <p className="msg-erro" id="erro-prato" role="alert">
           {erroLocal ?? erro}
         </p>
       )}
